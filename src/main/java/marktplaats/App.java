@@ -1,6 +1,6 @@
 package marktplaats;
 
-import marktplaats.boundary.Inlogscherm;
+import marktplaats.boundary.*;
 import marktplaats.domain.Gebruiker;
 
 public class App {
@@ -14,5 +14,20 @@ public class App {
         // na inloggen kan de actieveGebruiker worden opgehaald vanaf het inlogscherm
         actieveGebruiker = inlogScherm.getGebruiker();
         System.out.println(actieveGebruiker.getGebruikersNaam() + " is ingelogd!");
+
+        // vervolgens wordt een hoofdscherm getoond voor die gebruiker
+        checkGebruikersType();
+        new Hoofdscherm().toonHoofdscherm(actieveGebruiker);
+    }
+
+    private static void checkGebruikersType() {
+        switch(actieveGebruiker.getType()) {
+            case STANDAARD:
+                new HoofdschermStandaard().toonHoofdscherm(actieveGebruiker); break;
+            case BEHEERDER:
+                new HoofdschermBeheer().toonHoofdscherm(actieveGebruiker); break;
+            case MAGAZIJN:
+                new HoofdschermMagazijn().toonHoofdscherm(actieveGebruiker); break;
+        }
     }
 }
