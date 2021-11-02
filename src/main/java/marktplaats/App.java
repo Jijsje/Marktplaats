@@ -15,19 +15,11 @@ public class App {
         actieveGebruiker = inlogScherm.getGebruiker();
         System.out.println(actieveGebruiker.getGebruikersNaam() + " is ingelogd!");
 
-        // vervolgens wordt een hoofdscherm getoond voor die gebruiker
-        checkGebruikersType();
-        new Hoofdscherm().toonHoofdscherm(actieveGebruiker);
-    }
+        // vervolgens wordt een hoofdscherm getoond voor dit type gebruiker
+        Hoofdscherm hoofdscherm = Hoofdscherm.checkGebruikersType(actieveGebruiker);
+        hoofdscherm.toon(actieveGebruiker);
 
-    private static void checkGebruikersType() {
-        switch(actieveGebruiker.getType()) {
-            case STANDAARD:
-                new HoofdschermStandaard().toonHoofdscherm(actieveGebruiker); break;
-            case BEHEERDER:
-                new HoofdschermBeheer().toonHoofdscherm(actieveGebruiker); break;
-            case MAGAZIJN:
-                new HoofdschermMagazijn().toonHoofdscherm(actieveGebruiker); break;
-        }
+        // vanuit deze controller worden andere functies aangeroepen van het hoofdscherm
+        // er moet hoe dan ook een nieuwe boundary gereturned worden ...
     }
 }

@@ -1,6 +1,7 @@
 package marktplaats.boundary;
 
 import marktplaats.domain.Gebruiker;
+import marktplaats.domain.GebruikersType;
 
 import java.util.Scanner;
 
@@ -9,31 +10,41 @@ public class Inlogscherm {
     public Gebruiker g;
     private Scanner scanner = new Scanner(System.in);
 
-    public Inlogscherm toonInlogscherm() {
-        // inloggen kan voor nu op basis van ID
+    public Inlogscherm toonInlogscherm() { // returntype nodig?
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Vul een userID in te loggen");
-        // lees input
+        // lees input - inloggen kan voor nu op basis van ID
         String id = scanner.nextLine();
-        // valideer dat gebruiker bestaat
-        this.g = valideerGebruiker(id);
-        // bij geldige invoer wordt Gebruiker teruggegeven
+        // validatie/authenticatie + gebruiker cachen
+        valideerGebruiker(id);
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-
-        return this; // weet nog niet waarom het een inlogscherm zou moeten teruggeven..
+        return this;
     }
 
-    // tijdelijke methode
-    private Gebruiker valideerGebruiker(String id) {
+    // Dit komt in een DAO en wordt obv naam/wachtwoord combi
+    private void valideerGebruiker(String id) {
         try {
-            Integer.valueOf(id);
-        } catch (NumberFormatException e) {
-            System.out.println("Helaas makker");
+            int intId = Integer.parseInt(id);
+            if(intId < 1 || intId > 3 ) { throw new RuntimeException();}
+        } catch (RuntimeException e) { // includes NumberFormatException
+            System.out.println("FOUTE INVOER! Voer een getal tussen 1 en 3 in (incl.)");
+            valideerGebruiker(scanner.nextLine());
+            return;
         }
-        if (Integer.parseInt(id) == 0) {
-            return new Gebruiker(); // in de eerste stadia is dit altijd HarryDeTester,
-        } else {
-            return null;
+        maakTestGebruiker(Integer.parseInt(id));
+    }
+
+    private void maakTestGebruiker(int type) {
+        switch (type) {
+            case 1:
+                g = new Gebruiker(1, GebruikersType.STANDAARD, "HarryStandaard");
+                break;
+            case 2:
+                g = new Gebruiker(2, GebruikersType.BEHEERDER, "BertBeherder");
+                break;
+            case 3:
+                g = new Gebruiker(3, GebruikersType.MAGAZIJN, "MoMagazijn");
+                break;
         }
     }
 

@@ -2,39 +2,19 @@ package marktplaats.boundary;
 
 import marktplaats.domain.Gebruiker;
 
-public class Hoofdscherm {
+public interface Hoofdscherm {
 
-    // kijk of het handig is om meerdere klassen te gebruiken
-    public void toonHoofdscherm(Gebruiker g) {
-        checkGebruikersType(g);
-    }
+    void toon(Gebruiker g);
 
-    private void checkGebruikersType(Gebruiker g) {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    static Hoofdscherm checkGebruikersType(Gebruiker g) {
         switch(g.getType()) {
-            case STANDAARD:
-                toonHoofdschermStandaard(); break;
             case BEHEERDER:
-                toonHoofdschermBeheer(); break;
+                return new HoofdschermBeheer();
             case MAGAZIJN:
-                toonHoofdschermMagazijn(); break;
+                return new HoofdschermMagazijn();
+            default:
+                return new HoofdschermStandaard();
         }
     }
 
-    public void toonHoofdschermStandaard() {
-        System.out.println("Hoofdscherm standaardgebruiker");
-        System.out.println("Wat wil je doen?");
-        System.out.println("[1] - Kopen");
-        System.out.println("[2] - Verkopen");
-        System.out.println("[3] - ");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    }
-
-    public void toonHoofdschermBeheer() {
-        System.out.println("Hoofdscherm beheerder");
-    }
-
-    public void toonHoofdschermMagazijn() {
-        System.out.println("Hoofdscherm magazijnmedewerker");
-    }
 }
