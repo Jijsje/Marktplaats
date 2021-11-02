@@ -2,9 +2,10 @@ package marktplaats.boundary;
 
 import marktplaats.domain.Gebruiker;
 
-public interface Hoofdscherm {
+public interface Hoofdscherm extends Boundary {
 
-    void toon(Gebruiker g);
+    @Override
+    void toon();
 
     static Hoofdscherm checkGebruikersType(Gebruiker g) {
         switch(g.getType()) {

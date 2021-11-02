@@ -1,22 +1,20 @@
 package marktplaats.domain;
 
+import javax.persistence.*;
+
+@Entity
 public class Gebruiker {
 
+    @Id
     public int id;
-    private GebruikersType type;
+    public Gebruiker(){}
     public String gebruikersNaam;
+    private GebruikersType type;
 
-    public Gebruiker(){
-        // voor testdoeleinden krijgt de gebruiker standaardwaarden mee
-        this.id = 0;
-        this.type = GebruikersType.STANDAARD;
-        this.gebruikersNaam = "HarryDeTester";
-    }
-
-    public Gebruiker(int id, GebruikersType type, String gebruikersNaam) {
+    public Gebruiker(int id, String gebruikersNaam, GebruikersType type) {
         this.id = id;
-        this.type = type;
         this.gebruikersNaam = gebruikersNaam;
+        this.type = type;
     }
 
     public String getGebruikersNaam() {
@@ -26,4 +24,5 @@ public class Gebruiker {
     public GebruikersType getType() {
         return type;
     }
+
 }

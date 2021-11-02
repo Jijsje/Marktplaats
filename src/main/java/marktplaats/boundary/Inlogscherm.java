@@ -5,12 +5,13 @@ import marktplaats.domain.GebruikersType;
 
 import java.util.Scanner;
 
-public class Inlogscherm {
+public class Inlogscherm implements Boundary {
 
     public Gebruiker g;
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
-    public Inlogscherm toonInlogscherm() { // returntype nodig?
+    @Override
+    public void toon() {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Vul een userID in te loggen");
         // lees input - inloggen kan voor nu op basis van ID
@@ -18,7 +19,6 @@ public class Inlogscherm {
         // validatie/authenticatie + gebruiker cachen
         valideerGebruiker(id);
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        return this;
     }
 
     // Dit komt in een DAO en wordt obv naam/wachtwoord combi
@@ -37,13 +37,13 @@ public class Inlogscherm {
     private void maakTestGebruiker(int type) {
         switch (type) {
             case 1:
-                g = new Gebruiker(1, GebruikersType.STANDAARD, "HarryStandaard");
+                g = new Gebruiker(1, "SammyStandaard", GebruikersType.STANDAARD);
                 break;
             case 2:
-                g = new Gebruiker(2, GebruikersType.BEHEERDER, "BertBeherder");
+                g = new Gebruiker(2, "BertBeheerder", GebruikersType.BEHEERDER);
                 break;
             case 3:
-                g = new Gebruiker(3, GebruikersType.MAGAZIJN, "MoMagazijn");
+                g = new Gebruiker(3, "MarkMagazijn", GebruikersType.MAGAZIJN);
                 break;
         }
     }

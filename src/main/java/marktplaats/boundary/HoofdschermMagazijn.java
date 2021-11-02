@@ -1,10 +1,9 @@
 package marktplaats.boundary;
 
-import marktplaats.domain.Gebruiker;
-
 public class HoofdschermMagazijn implements Hoofdscherm{
 
-    public void toon(Gebruiker g) {
+    @Override
+    public void toon() {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Hoofdscherm magazijnmedewerker");
         System.out.println("Wat wil je doen?");
