@@ -1,14 +1,14 @@
 package marktplaats.boundary;
 
-import marktplaats.domain.Gebruiker;
+import static marktplaats.App.actieveGebruiker;
 
 public interface Hoofdscherm extends Boundary {
 
     @Override
     void toon();
 
-    static Hoofdscherm checkGebruikersType(Gebruiker g) {
-        switch(g.getType()) {
+    static Hoofdscherm checkGebruikersType() {
+        switch(actieveGebruiker.getType()) {
             case BEHEERDER:
                 return new HoofdschermBeheer();
             case MAGAZIJN:

@@ -15,6 +15,7 @@ public class Gebruiker {
         this.id = id;
         this.gebruikersNaam = gebruikersNaam;
         this.type = type;
+        // logregel: gebruiker gemaakt
     }
 
     public String getGebruikersNaam() {
