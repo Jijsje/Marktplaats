@@ -13,6 +13,7 @@ public class Advertentie {
     @ManyToOne
     Gebruiker verkoper;
     LocalDate plaatsingsDatum;
+    String omschrijving;
 
     public Advertentie() { }
 
@@ -25,6 +26,10 @@ public class Advertentie {
         // logregel: advertentie gemaakt
     }
 
+    public void setOmschrijving(String omschrijving){
+        this.omschrijving = omschrijving;
+    }
+
     @Override
     public String toString() {
         return "Advertentie{" +
@@ -34,5 +39,29 @@ public class Advertentie {
                 ", verkoper = " + verkoper.getGebruikersNaam() +
                 ", plaatsingsDatum = " + plaatsingsDatum +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getTitel() {
+        return titel;
+    }
+
+    public int getPrijs() {
+        return prijs;
+    }
+
+    public String getVerkoper() {
+        return verkoper.getGebruikersNaam();
+    }
+
+    public LocalDate getPlaatsingsDatum() {
+        return plaatsingsDatum;
+    }
+
+    public String getOmschrijving() {
+        return omschrijving;
     }
 }

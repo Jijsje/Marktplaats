@@ -18,14 +18,10 @@ public class App {
     public static void main(String[] args) {
         Inlogscherm inlogScherm = new Inlogscherm();
         inlogScherm.toon();
-        // na inloggen kan de actieveGebruiker worden opgehaald vanaf het inlogscherm
         actieveGebruiker = inlogScherm.getActieveGebruiker();
-        System.out.println(actieveGebruiker.getGebruikersNaam() + " is ingelogd!");
 
-        // vervolgens wordt een hoofdscherm getoond voor dit type gebruiker
+        // afhankelijk van het type gebruiker wordt een ander hoofdscherm getoond
         Hoofdscherm hoofdscherm = Hoofdscherm.checkGebruikersType();
         hoofdscherm.toon();
-        // vanaf hier verwijzen pagina's naar elkaar
-
     }
 }

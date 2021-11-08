@@ -14,29 +14,16 @@ public class Inlogscherm implements Boundary {
     @Override
     public void toon() {
         // voor tests:
-        maakTestGebruikers();
+        // maakTestGebruikers();
 
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Vul een userID in:");
-        // lees input - inloggen kan voor nu op basis van ID
+        System.out.println("~~~~~~~~~~~~~Inloggen~~~~~~~~~~~~~");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        System.out.println("UserId:");
         String id = scanner.nextLine();
-        // validatie/authenticatie + gebruiker cachen
-        valideerGebruiker(id);
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    }
-
-    private void valideerGebruiker(String id) {
-        try {Integer.parseInt(id);}
-        catch (NumberFormatException e) { // includes NumberFormatException
-            System.out.println("FOUTE INVOER! Voer een getal in:");
-            valideerGebruiker(scanner.nextLine());
-            return;
-        } /*catch (RuntimeException e) {
-            System.out.println("Gebruiker bestaat niet. Probeer opnieuw:");
-            valideerGebruiker(scanner.nextLine());
-            return;
-        }*/
-        g = dao.zoek(Integer.parseInt(id));
+        g = dao.zoek(id);
+        System.out.println("Wachtwoord:");
+        scanner.nextLine();
     }
 
     public void maakTestGebruikers() {
